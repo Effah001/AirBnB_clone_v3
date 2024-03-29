@@ -7,12 +7,12 @@ app = Flask(__name__)
 
 app.register_blueprint(app_views)
 
-def teardown_storage(exception):
-    storage.close()
 
 @app.teardown_appcontext
 def teardown_context(exception):
-    teardown_storage(exception)
+    """close storage"""
+    storage.close()
+
 
 if __name__ == '__main__':
     # Get host and port from environment variables or use default values
