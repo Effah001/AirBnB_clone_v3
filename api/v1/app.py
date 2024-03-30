@@ -9,7 +9,7 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def teardown_context(exception):
+def teardown_context(obj):
     """close storage"""
     storage.close()
 
