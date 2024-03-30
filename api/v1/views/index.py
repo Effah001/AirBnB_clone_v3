@@ -2,13 +2,12 @@
 """
 endpoint(route) status
 """
-from flask import Blueprint
-
-
-app_views = Blueprint('app_views', __name__)
+from flask import Flask
+from flask import jsonify
+from api.v1.views import app_views
 
 
 @app_views.route('/status')
 def status():
     """Returns a JSON status"""
-    return {"status": "OK"}
+    return jsonify{"status": "OK"}
