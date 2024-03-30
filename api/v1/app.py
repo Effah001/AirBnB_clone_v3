@@ -22,8 +22,8 @@ def teardown_context(obj):
 
 if __name__ == '__main__':
     # Get host and port from environment variables or use default values
-    host = os.getenv('HBNB_API_HOST', '0.0.0.0')
-    port = int(os.getenv('HBNB_API_PORT', 5000))
+    host = os.getenv('HBNB_API_HOST', default='0.0.0.0')
+    port = os.getenv('HBNB_API_PORT', default=5000))
 
     # Run the Flask app
-    app.run(host=host, port=port, threaded=True, debug=True)
+    app.run(host, int(port), threaded=True)
