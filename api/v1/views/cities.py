@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """State module"""
 from flask import jsonify, request, abort, make_response
+from models.city import City
 from models import storage
 from models.state import State
 from api.v1.views import app_views
