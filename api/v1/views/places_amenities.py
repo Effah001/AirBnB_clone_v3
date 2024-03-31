@@ -10,7 +10,8 @@ from models.place import Place
 from models.amenity import Amenity
 
 
-@app_views.route('/places/<place_id>/amenities', methods=['GET'], strict_slashes=False)
+@app_views.route('/places/<place_id>/amenities', methods=['GET'],
+                 strict_slashes=False)
 def get_place_amenities(place_id):
     """Retrieves the list of all Amenity objects of a Place"""
     place = storage.get(Place, place_id)
@@ -52,4 +53,3 @@ def link_amenity_to_place(place_id, amenity_id):
     place.amenities.append(amenity)
     storage.save()
     return jsonify(amenity.to_dict()), 201
-
