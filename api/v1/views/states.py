@@ -22,7 +22,7 @@ def get_state(state_id):
     if state:
         return jsonify(state.to_dict())
     else:
-        return abort(404)
+        abort(404)
 
 
 # Route to delete a specific State object
