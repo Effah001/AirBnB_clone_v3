@@ -32,4 +32,4 @@ class User(BaseModel, Base):
         """sets MD5 encryption password"""
         if key == "password":
             value = md5(value.encode()).hexdigest()
-        super().__setattr__(name, value)
+        super().__setattr__(key, value)
