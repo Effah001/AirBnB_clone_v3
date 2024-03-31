@@ -28,9 +28,9 @@ def delete_state(state_id):
     """Deletes a State object"""
     state = storage.get(State, state_id)
     if state:
-        storage.delete(state)
+        storage.delete()
         storage.save()
-        return jsonify({}), 200
+        return jsonify({})
     else:
         abort(404)
 
@@ -44,7 +44,6 @@ def create_state():
     if 'name' not in data:
         return make_response(jsonify({"error": "Missing name"}), 400)
     new_state = State(**data)
-    storage.new(new_state)
     storage.save()
     return jsonify(new_state.to_dict()), 201
 
@@ -62,4 +61,4 @@ def update_state(state_id):
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(state, key, value)
     storage.save()
-    return jsonify(state.to_dict()), 200
+    return jsonify(state.to_dict())
