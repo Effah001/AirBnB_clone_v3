@@ -6,7 +6,6 @@ from models.state import State
 from api.v1.views import app_views
 
 
-# Route to retrieve all State objects
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_all_states():
     """Retrieves the list of all State objects"""
@@ -14,7 +13,6 @@ def get_all_states():
     return jsonify([state.to_dict() for state in states])
 
 
-# Route to retrieve a specific State object
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
     """Retrieves a State object"""
@@ -25,7 +23,6 @@ def get_state(state_id):
         abort(404)
 
 
-# Route to delete a specific State object
 @app_views.route('/states/<state_id>', methods=['DELETE'])
 def delete_state(state_id):
     """Deletes a State object"""
@@ -38,7 +35,6 @@ def delete_state(state_id):
         abort(404)
 
 
-# Route to create a new State object
 @app_views.route('/states', methods=['POST'])
 def create_state():
     """Creates a new State object"""
@@ -46,14 +42,13 @@ def create_state():
     if not data:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     if 'name' not in data:
-        return make_response(jsonify({"error": "Missing name"}). 400)
+        return make_response(jsonify({"error": "Missing name"}), 400)
     new_state = State(**data)
     storage.new(new_state)
     storage.save()
     return jsonify(new_state.to_dict()), 201
 
 
-# Route to update a State object
 @app_views.route('/states/<state_id>', methods=['PUT'])
 def update_state(state_id):
     """Updates a State object"""
@@ -62,7 +57,7 @@ def update_state(state_id):
         abort(404)
     data = request.get_json()
     if not data:
-        abort(400, description="Not a JSON")
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
     for key, value in data.items():
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(state, key, value)
