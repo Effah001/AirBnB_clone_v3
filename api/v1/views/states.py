@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """State module"""
 import json
-from flask import jsonify, request, abort
+from flask import jsonify, request, abort, make_response
 from models import storage
 from models.state import State
 from api.v1.views import app_views
@@ -45,9 +45,9 @@ def create_state():
     """Creates a new State object"""
     data = request.get_json()
     if not data:
-        abort(400, description="Not a JSON")
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
     if 'name' not in data:
-        abort(400, description="Missing name")
+        return make_response(jsonify({"error": "Missing name"}). 400)
     new_state = State(**data)
     storage.new(new_state)
     storage.save()
