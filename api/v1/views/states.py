@@ -28,7 +28,7 @@ def delete_state(state_id):
     """Deletes a State object"""
     state = storage.get(State, state_id)
     if state:
-        storage.delete()
+        storage.delete(state)
         storage.save()
         return make_response(jsonify({}), 200)
     else:
