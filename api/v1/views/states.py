@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""State module"""
 import json
 from flask import jsonify, request, abort
 from models import storage
