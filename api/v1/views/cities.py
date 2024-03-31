@@ -27,7 +27,7 @@ def get_city(city_id):
         abort(404)
 
 
-@app_views.route('/cities/<city_id>', methods=['DELETE'], strict_slashed=False)
+@app_views.route('/cities/<city_id>', methods=['DELETE'], strict_slashes=False)
 def delete_city(city_id):
     """Deletes a State object"""
     city = storage.get(City, city_id)
