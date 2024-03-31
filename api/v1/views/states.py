@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """State module"""
-import json
 from flask import jsonify, request, abort, make_response
 from models import storage
 from models.state import State
