@@ -9,25 +9,21 @@ from api.v1.views import app_views
 
 # Route to retrieve all State objects
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
-def get_all():
-    """ get all by id """
-    all_list = [obj.to_dict() for obj in storage.all(State).values()]
-    return jsonify(all_list)
+def get_all_states():
+    """Retrieves the list of all State objects"""
+    states = storage.all(State).values()
+    return jsonify([state.to_dict() for state in states])
 
-#def get_all_states():
- #   """Retrieves the list of all State objects"""
-  #  states = storage.all(State).values()
-   # return jsonify([state.to_dict() for state in states])
 
 # Route to retrieve a specific State object
-@app_views.route('/states/<state_id>', methods=['GET'])
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
     """Retrieves a State object"""
     state = storage.get(State, state_id)
     if state:
         return jsonify(state.to_dict())
     else:
-        return jsonify({"error": "Not found"}), 404
+        return abort(404)
 
 
 # Route to delete a specific State object
